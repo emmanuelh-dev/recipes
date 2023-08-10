@@ -1,11 +1,19 @@
 import React from "react";
 import { useApiContext } from "../context/ApiContext";
-import { Card, CardContent, CardMedia, Typography, Grid, Container } from "@mui/material";
+import { Grid, Container } from "@mui/material";
 import RecipeCard from "@/components/RecipeCard";
-import Layout from "@/Layout/Layout";
 
-function MyComponent() {
-  const { data } = useApiContext();
+function Index() {
+  const { data, searchTerm } = useApiContext(); // Obtén el valor de búsqueda del contexto
+
+  let filteredData = data; // Inicialmente, muestra todos los datos
+
+  if (searchTerm) {
+    // Si hay un valor de búsqueda, filtra los datos
+    filteredData = data.filter(item =>
+      item.strMeal.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
 
   if (!data) {
     // Manejar el caso cuando los datos aún no están disponibles
@@ -15,7 +23,7 @@ function MyComponent() {
   return (
     <Container >
       <Grid container spacing={2}>
-        {data.map((item) => (
+        {filteredData.map((item) => (
           <Grid item xs={12} sm={6} md={3} key={item.idMeal}>
             <RecipeCard item={item}/>
           </Grid>
@@ -25,4 +33,4 @@ function MyComponent() {
   );
 }
 
-export default MyComponent;
+export default Index;

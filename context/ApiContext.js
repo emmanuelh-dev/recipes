@@ -9,7 +9,7 @@ export const useApiContext = () => {
 
 export const ApiProvider = ({ children }) => {
   const [data, setData] = useState([]);
-
+  const [searchTerm, setSearchTerm] = useState("");
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
@@ -25,6 +25,8 @@ export const ApiProvider = ({ children }) => {
 
   const apiContextValue = {
     data,
+    searchTerm,
+    setSearchTerm,
   };
 
   return (

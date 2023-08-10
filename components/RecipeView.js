@@ -1,15 +1,9 @@
 import React from "react";
 import {
     Typography,
-    Paper,
-    Grid,
-    Button,
-    Card,
     CardContent,
     CardMedia,
-    Container,
   } from "@mui/material";
-  
 
 const RecipeView = ({ items }) => {
   return (
@@ -21,6 +15,7 @@ const RecipeView = ({ items }) => {
         alt={items.strMeal}
       />
       <CardContent>
+
         <Typography variant="h5" component="div">
           {items.strMeal}
         </Typography>
