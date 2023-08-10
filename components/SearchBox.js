@@ -3,7 +3,7 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { useApiContext } from "@/context/ApiContext";
-
+import Router from "next/router";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -47,11 +47,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchBox = () => {
-    const { searchTerm, setSearchTerm } = useApiContext();
+  const { searchTerm, setSearchTerm } = useApiContext();
 
-    const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
-      };
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+        Router.push("/")
+    }
+  }
   return (
     <div>
       <Search>
@@ -61,9 +66,9 @@ const SearchBox = () => {
         <StyledInputBase
           placeholder="Search…"
           inputProps={{ "aria-label": "search" }}
-
-        value={searchTerm}
-        onChange={handleSearchChange}
+          value={searchTerm}
+          onChange={handleSearchChange}
+          onKeyDown={handleKeyPress}
         />
       </Search>
     </div>
